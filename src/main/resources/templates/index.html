@@ -9,6 +9,12 @@
 
 <body>
 <div class="container mt-5">
+    <div th:if="${not #lists.isEmpty(errors)}" class="alert alert-danger">
+        <h4>Error:</h4>
+        <ul>
+            <li th:each="error : ${errors}" th:text="${error}" class="mb-1"></li>
+        </ul>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <form th:action="@{/generate}" method="post">
@@ -17,13 +23,17 @@
                     <textarea class="form-control" id="text" name="text" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="lang" class="form-label">Select language:</label>
+                    <label for="lang" class="form-label">Select Language:</label>
                     <select class="form-select" id="lang" name="lang">
                         <option value="jp">Japanese</option>
                         <option value="kr">Korean</option>
                         <option value="es">Spanish</option>
                         <option value="fr">French</option>
                     </select>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="multi-mp3" name="multi-mp3">
+                    <label class="form-check-label" for="multi-mp3">Generate Multiple MP3s</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Generate</button>
             </form>
