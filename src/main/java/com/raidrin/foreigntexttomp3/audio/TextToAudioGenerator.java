@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TextToAudioGenerator {
-    public byte[] generate(String text, LanguageCodes languageCode, SsmlVoiceGender gender) {
+    public byte[] generate(String text, LanguageCodes languageCode, SsmlVoiceGender gender, String voiceName) {
         try {
             try (TextToSpeechClient textToSpeechClient = TextToSpeechClient.create()) {
                 // Set the text input to be synthesized
@@ -16,8 +16,10 @@ public class TextToAudioGenerator {
                 VoiceSelectionParams voice =
                         VoiceSelectionParams.newBuilder()
                                 .setLanguageCode(languageCode.getCode())
+                                .setName(voiceName)
                                 .setSsmlGender(gender)
                                 .build();
+
 
                 // Select the type of audio file you want returned
                 AudioConfig audioConfig =
