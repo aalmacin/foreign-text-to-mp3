@@ -86,14 +86,13 @@ public class ConvertController {
 
             texts.forEach(textItem -> {
                 byte[] audio = textToAudioGenerator.generate(
-                        textItem,
+                        textItem.trim(),
                         languageCode,
                         voiceGender,
                         voiceName
                 );
                 try {
-                    String mp3FileName = Base64.getEncoder().encodeToString(textItem.getBytes(StandardCharsets.UTF_8));
-                    zipOutputStream.putNextEntry(new ZipEntry(mp3FileName + ".mp3"));
+                    zipOutputStream.putNextEntry(new ZipEntry(textItem.trim() + ".mp3"));
                     zipOutputStream.write(audio);
                     zipOutputStream.closeEntry();
                 } catch (Exception e) {
