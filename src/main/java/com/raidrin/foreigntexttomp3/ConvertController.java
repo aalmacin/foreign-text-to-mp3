@@ -16,10 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -79,7 +76,9 @@ public class ConvertController {
 
         if (multipleMP3) {
             String[] textList = text.split("\n");
-            List<String> texts = Arrays.asList(textList);
+            List<String> texts = new ArrayList<>(
+                    new HashSet<>(Arrays.stream(textList).map(String::trim).toList())
+            );
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ZipOutputStream zipOutputStream = new ZipOutputStream(byteArrayOutputStream);
@@ -114,7 +113,7 @@ public class ConvertController {
             );
             String mp3FileName = Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));
             response.setContentType("audio/mpeg");
-            response.setHeader("Content-Disposition", "attachment; filename="+mp3FileName+".mp3");
+            response.setHeader("Content-Disposition", "attachment; filename=" + mp3FileName + ".mp3");
 
             OutputStream outputStream = response.getOutputStream();
             outputStream.write(audio);
