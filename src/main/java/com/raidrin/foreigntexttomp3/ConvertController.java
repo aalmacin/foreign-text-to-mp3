@@ -3,11 +3,9 @@ package com.raidrin.foreigntexttomp3;
 import com.google.cloud.texttospeech.v1.SsmlVoiceGender;
 import com.raidrin.foreigntexttomp3.audio.LanguageCodes;
 import com.raidrin.foreigntexttomp3.audio.TextToAudioGenerator;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +49,11 @@ public class ConvertController {
                 languageCode = LanguageCodes.French;
                 voiceGender = SsmlVoiceGender.MALE;
                 voiceName = "fr-FR-Neural2-B";
+            }
+            case "cafr" -> {
+                languageCode = LanguageCodes.CanadianFrench;
+                voiceGender = SsmlVoiceGender.FEMALE;
+                voiceName = "fr-CA-Neural2-A";
             }
             case "kr" -> {
                 languageCode = LanguageCodes.Korean;

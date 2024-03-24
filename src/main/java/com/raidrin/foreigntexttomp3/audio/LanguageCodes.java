@@ -3,6 +3,7 @@ package com.raidrin.foreigntexttomp3.audio;
 public enum LanguageCodes {
     Spanish("es-US"),
     French("fr-FR"),
+    CanadianFrench("fr-CA"),
     Korean("ko-KR"),
     Japanese("ja-JP");
 
